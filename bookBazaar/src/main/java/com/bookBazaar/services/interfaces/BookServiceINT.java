@@ -8,4 +8,5 @@ public interface BookServiceINT {
     public BookDTO createNewBook(BookDTO newBookDetails);
     public List<BookDTO> getAllBooks();
     public BookDTO getSpecificBookByID(String id);
+    public List<BookDTO> getAllBooksByKind(String kind, String value);
 }

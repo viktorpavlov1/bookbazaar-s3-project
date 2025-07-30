@@ -34,8 +34,14 @@ public class BookController {
     @GetMapping("{id}")
     public ResponseEntity<BookDTO> getSpecificBook(@PathVariable(value="id") final String id)
     {
-        System.out.println(id);
         BookDTO response = bookService.getSpecificBookByID(id);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/find/{kind}")
+    public ResponseEntity<List<BookDTO>> getByKind(@PathVariable(value="kind") final String kind, @RequestBody String value)
+    {
+        List<BookDTO> response = bookService.getAllBooksByKind(kind, value);
         return ResponseEntity.ok().body(response);
     }
 }

@@ -52,7 +52,49 @@ public class BookServiceIMPL implements BookServiceINT {
         return modelConverter.convertBookEntityToBookDTO(preparedBook);
     }
 
+    @Override
+    public List<BookDTO> getAllBooksByKind(String kind, String value) {
+        switch(kind)
+        {
+            case "title":
+                List<BookEntity> allBookEntitiesWithSpecificTitle = bookRepository.findAllByTitleContainingIgnoreCase(value);
+                List<BookDTO> allBookWithSpecificTitle = new ArrayList<>();
 
+                for(BookEntity specificBookEntity:allBookEntitiesWithSpecificTitle)
+                {
+                    BookDTO specificBook = modelConverter.convertBookEntityToBookDTO(specificBookEntity);
+                    allBookWithSpecificTitle.add(specificBook);
+                }
+                return allBookWithSpecificTitle;
+
+
+            case "author":
+                List<BookEntity> allBookEntitiesWithSpecificAuthor = bookRepository.findAllByAuthorContainingIgnoreCase(value);
+                List<BookDTO> allBookWithSpecificAuthor = new ArrayList<>();
+
+                for(BookEntity specificBookEntity:allBookEntitiesWithSpecificAuthor)
+                {
+                    BookDTO specificBook = modelConverter.convertBookEntityToBookDTO(specificBookEntity);
+                    allBookWithSpecificAuthor.add(specificBook);
+                }
+                return allBookWithSpecificAuthor;
+
+
+            case "category":
+                List<BookEntity> allBookEntitiesWithSpecificCategory = bookRepository.findAllByCategoryContainingIgnoreCase(value);
+                List<BookDTO> allBookWithSpecificCategory = new ArrayList<>();
+
+                for(BookEntity specificBookEntity:allBookEntitiesWithSpecificCategory)
+                {
+                    BookDTO specificBook = modelConverter.convertBookEntityToBookDTO(specificBookEntity);
+                    allBookWithSpecificCategory.add(specificBook);
+                }
+                return allBookWithSpecificCategory;
+
+            default:
+                throw new RuntimeException("Unsupported kind for search");
+        }
+    }
 
 
 }
