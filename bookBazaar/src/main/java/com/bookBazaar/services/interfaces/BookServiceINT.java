@@ -9,4 +9,6 @@ public interface BookServiceINT {
     public List<BookDTO> getAllBooks();
     public BookDTO getSpecificBookByID(String id);
     public List<BookDTO> getAllBooksByKind(String kind, String value);
+    public void deleteSpecificBook(String id);
+    public BookDTO updateSpecificBook(BookDTO updatedValues);
 }

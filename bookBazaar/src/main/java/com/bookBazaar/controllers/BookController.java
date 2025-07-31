@@ -3,7 +3,6 @@ package com.bookBazaar.controllers;
 import com.bookBazaar.models.dto.BookDTO;
 import com.bookBazaar.services.interfaces.BookServiceINT;
 import lombok.RequiredArgsConstructor;
-import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +41,20 @@ public class BookController {
     public ResponseEntity<List<BookDTO>> getByKind(@PathVariable(value="kind") final String kind, @RequestBody String value)
     {
         List<BookDTO> response = bookService.getAllBooksByKind(kind, value);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteSpecificBook(@PathVariable(value="id") final String id)
+    {
+        bookService.deleteSpecificBook(id);
+        return ResponseEntity.ok().body("The book was deleted!");
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<BookDTO> updateSpecificBook(@RequestBody BookDTO value)
+    {
+        BookDTO response = bookService.updateSpecificBook(value);
         return ResponseEntity.ok().body(response);
     }
 }
