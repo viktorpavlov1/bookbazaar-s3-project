@@ -2,6 +2,8 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.3'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id "org.sonarqube" version "6.2.0.5505"
+	id "jacoco"
 }
 
 group = 'com.example'
@@ -35,4 +37,31 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+sonarqube {
+	properties{
+		property "sonar.projectKey", "bookBazaar"
+		property "sonar.host.url", "http://localhost:9000/"
+		property "sonar.login", "sqp_f819a40de3f07bbde4817f10cd6cbb9a6e868635"
+	}
+}
+
+tasks.jacocoTestReport {
+	dependsOn tasks.test
+	reports {
+		xml.required.set(true)
+		html.required.set(true)
+		csv.required.set(false)
+	}
+}
+
+tasks.jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			limit {
+				minimum = 0.80
+			}
+		}
+	}
 }
