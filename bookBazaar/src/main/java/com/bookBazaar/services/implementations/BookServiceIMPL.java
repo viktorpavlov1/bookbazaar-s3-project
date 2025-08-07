@@ -1,6 +1,6 @@
 package com.bookBazaar.services.implementations;
 
-import com.bookBazaar.models.converter.ModelConverterINT;
+import com.bookBazaar.models.converter.ModelConverter;
 import com.bookBazaar.models.dto.BookDTO;
 import com.bookBazaar.models.entities.BookEntity;
 import com.bookBazaar.models.repositories.BookRepository;
@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +19,7 @@ import java.util.UUID;
 public class BookServiceIMPL implements BookServiceINT {
 
     private final BookRepository bookRepository;
-    private final ModelConverterINT modelConverter;
+    private final ModelConverter modelConverter = new ModelConverter();
 
     @Override
     public BookDTO createNewBook(BookDTO newBookDetails) {
