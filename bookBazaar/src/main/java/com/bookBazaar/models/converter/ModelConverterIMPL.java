@@ -9,9 +9,8 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ModelConverterIMPL implements ModelConverterINT {
+public class ModelConverterIMPL {
 
-    @Override
     public BookEntity convertBookDTOToBookEntity(BookDTO bookDTO) {
         return BookEntity.builder()
                 .title(bookDTO.getTitle())
@@ -24,7 +23,6 @@ public class ModelConverterIMPL implements ModelConverterINT {
                 .build();
     }
 
-    @Override
     public BookDTO convertBookEntityToBookDTO(BookEntity bookEntity) {
         return BookDTO.builder()
                 .id(Optional.of(bookEntity.getId()))
