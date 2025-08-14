@@ -1,6 +1,6 @@
 package com.bookBazaar.services.implementations;
 
-import com.bookBazaar.models.converter.ModelConverter;
+import com.bookBazaar.models.other.ModelConverter;
 import com.bookBazaar.models.dto.BookDTO;
 import com.bookBazaar.models.entities.BookEntity;
 import com.bookBazaar.models.repositories.BookRepository;

@@ -33,6 +33,10 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 }
 
 tasks.named('test') {
@@ -43,7 +47,7 @@ sonarqube {
 	properties{
 		property "sonar.projectKey", "bookBazaar"
 		property "sonar.host.url", "http://localhost:9000/"
-		property "sonar.login", "sqp_37e2807abac13969a2011848d3c0b49340ddecc6"
+		property "sonar.login", "sqp_f819a40de3f07bbde4817f10cd6cbb9a6e868635"
 		property "sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
 	}
 }
