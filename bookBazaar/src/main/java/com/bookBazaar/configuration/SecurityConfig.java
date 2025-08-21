@@ -23,26 +23,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtRequestFilter jwtFilter) throws Exception {
         http
-                .cors(cors -> {}) // <-- enable CORS handling
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        // Permit all preflight requests
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
-                        .requestMatchers("/api/users/login").permitAll()
-                        .requestMatchers("/api/users/specificUser/**").permitAll()
-                        .requestMatchers("/api/users/newUser").permitAll()
-                        .requestMatchers("/api/books/all").permitAll()
-
-                        // Protect book mutations (role must be admin)
-                        .requestMatchers(HttpMethod.POST, "/api/books/new").hasRole("admin")
-                        .requestMatchers(HttpMethod.PUT, "/api/books/update").hasRole("admin")
-                        .requestMatchers(HttpMethod.DELETE, "/api/books/**").hasRole("admin")
-
-                        .anyRequest().authenticated()
+                .authorizeHttpRequests(authorizeRequests ->
+                        authorizeRequests
+                                .requestMatchers("/api/users/login").permitAll()
+                                .requestMatchers("/api/users/newUser").permitAll()
+                                .requestMatchers("/api/books/all").permitAll()
+                                .requestMatchers("/api/shoppingCart/add").permitAll()
+                                .requestMatchers("/api/books/new").hasRole("admin")
+                                .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 
