@@ -50,14 +50,14 @@ jobs:
         path: |
           bookBazaar/build/libs/*.jar
           bookBazaar/build/distributions/*
-          
+
   testing:
     name: Test Backend
     needs: build
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./bookBazaar
+        working-directory: ./bookBazaar/bookBazaar
     steps:
       - name: Run tests
         run: ./gradlew test
